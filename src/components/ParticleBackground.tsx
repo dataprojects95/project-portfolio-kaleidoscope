@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameId = useRef<number>();
 
-  useEffect(() => {
+  const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -17,11 +18,6 @@ const ParticleBackground = () => {
       dy: number;
       size: number;
     }> = [];
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
 
     const createParticles = () => {
       particles = [];
@@ -38,7 +34,7 @@ const ParticleBackground = () => {
       }
     };
 
-    const animate = () => {
+    const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach((particle, i) => {
@@ -70,22 +66,35 @@ const ParticleBackground = () => {
         });
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId.current = requestAnimationFrame(drawParticles);
+    };
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createParticles();
     };
 
     resize();
     createParticles();
-    animate();
+    drawParticles();
 
-    window.addEventListener('resize', () => {
-      resize();
-      createParticles();
-    });
+    window.addEventListener('resize', resize);
 
     return () => {
       window.removeEventListener('resize', resize);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    const cleanup = animate();
+    return () => {
+      if (cleanup) cleanup();
+    };
+  }, [animate]);
 
   return <canvas ref={canvasRef} className="fixed inset-0 -z-10" />;
 };
