@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const basename = import.meta.env.DEV ? "/" : "/project-portfolio-kaleidoscope";
+  const basename = "/project-portfolio-kaleidoscope";
   
   return (
     <QueryClientProvider client={queryClient}>

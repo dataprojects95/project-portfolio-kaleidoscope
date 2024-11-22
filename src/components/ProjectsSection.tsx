@@ -33,7 +33,7 @@ const ProjectsSection = () => {
     <section className="py-20 px-6 bg-muted">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 0.9, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="max-w-6xl mx-auto"
       >
