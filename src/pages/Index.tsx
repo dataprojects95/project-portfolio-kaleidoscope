@@ -11,22 +11,38 @@ const Index = () => {
       <ParticleBackground />
       
       {/* Navigation */}
-      <nav className="fixed w-full top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to="/" className="text-primary hover:text-primary/80 transition-colors">
-            HOME
-          </Link>
-          <div className="flex gap-8 text-gray-600">
-            <Link to="/intro" className="hover:text-primary transition-colors">INTRO</Link>
-            <Link to="/services" className="hover:text-primary transition-colors">SERVICES</Link>
-            <Link to="/blog" className="hover:text-primary transition-colors">BLOG</Link>
-            <Link to="/websites" className="hover:text-primary transition-colors">WEBSITES</Link>
-            <Link to="/portfolio" className="hover:text-primary transition-colors">PORTFOLIO</Link>
-            <Link to="/testimonials" className="hover:text-primary transition-colors">TESTIMONIALS</Link>
-            <Link to="/contact" className="hover:text-primary transition-colors">CONTACT</Link>
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed w-full top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 shadow-sm"
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <Link 
+              to="/" 
+              className="text-primary font-bold text-xl hover:text-primary/80 transition-colors"
+            >
+              YAN HOLTZ
+            </Link>
+            <div className="hidden md:flex gap-8 text-gray-600 dark:text-gray-300">
+              <Link to="/intro" className="hover:text-primary transition-colors hover:scale-105 transform">INTRO</Link>
+              <Link to="/services" className="hover:text-primary transition-colors hover:scale-105 transform">SERVICES</Link>
+              <Link to="/blog" className="hover:text-primary transition-colors hover:scale-105 transform">BLOG</Link>
+              <Link to="/websites" className="hover:text-primary transition-colors hover:scale-105 transform">WEBSITES</Link>
+              <Link to="/portfolio" className="hover:text-primary transition-colors hover:scale-105 transform">PORTFOLIO</Link>
+              <Link to="/testimonials" className="hover:text-primary transition-colors hover:scale-105 transform">TESTIMONIALS</Link>
+              <Link to="/contact" className="hover:text-primary transition-colors hover:scale-105 transform">CONTACT</Link>
+            </div>
+            {/* Mobile menu button - you might want to implement a mobile menu later */}
+            <button className="md:hidden text-gray-600 dark:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
       <header className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
