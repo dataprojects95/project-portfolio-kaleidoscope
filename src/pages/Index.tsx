@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
 import { Github, Twitter, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SkillsSection from '../components/SkillsSection';
+import ProjectsSection from '../components/ProjectsSection';
 
 const Index = () => {
   return (
@@ -117,6 +119,12 @@ const Index = () => {
           <div className="w-6 h-6 border-b-2 border-r-2 border-primary transform rotate-45"></div>
         </motion.div>
       </header>
+
+      {/* Skills Section */}
+      <SkillsSection />
+
+      {/* Projects Section */}
+      <ProjectsSection />
     </div>
   );
 };
